@@ -31,7 +31,6 @@ Media_Next::PassToLocalMachine()
 Media_Prev::PassToLocalMachine()
 Media_Stop::PassToLocalMachine()
 Media_Play_Pause::PassToLocalMachine()
-AppsKey::OpenCalculator() ;Launch_App2
 !^Down:: send {RAlt down}{XButton2}{RAlt up} ; Ctrl + Alt + Down
 
 PassToLocalMachine() {
@@ -138,15 +137,6 @@ VA_IMMDeviceCollection_GetCount(this, ByRef Count) {
 
 VA_IMMDeviceCollection_Item(this, Index, ByRef Device) {
   return DllCall(NumGet(NumGet(this+0)+4*A_PtrSize), "ptr", this, "uint", Index, "ptr*", Device)
-}
-
-OpenCalculator() {
-  WS_CAPTION := 0xC00000
-  WinGet, RdpWindowStyle, Style, %RdpWindowTitle%
-  If RdpWindowStyle & WS_CAPTION = 0 ; check if RDP client is in fullscreen mode (no title bar)
-    Send {Launch_App2}
-  Else
-    Run calc.exe ; Send {Launch_App2} doesn't work locally for some reason
 }
 
 Exit:
